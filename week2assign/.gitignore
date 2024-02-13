@@ -1,0 +1,3 @@
+.mypy*
+.gith*
+__pycache__
