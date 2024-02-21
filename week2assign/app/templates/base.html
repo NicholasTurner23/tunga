@@ -3,55 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} - Tunga Blog</title>
-    <style>
-        h2 {
-            width: 100%;
-        }
-
-        .title {
-            margin: 5px;
-            width: 100%;
-        }
-
-        .content {
-            margin: 5px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-
-        .post {
-            flex: 20%;
-            padding: 10px;
-            margin: 5px;
-            background-color: #f3f3f3;
-            inline-size: 100%;
-        }
-
-        .title a {
-            color: #00a36f;
-            text-decoration: none;
-        }
-
-        nav a {
-            color: #d64161;
-            font-size: 3em;
-            margin-left: 50px;
-            text-decoration: none;
-        }
-
-    </style>
+    {{ bootstrap.load_css() }}
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('main.index') }}">Blog</a>
-        <a href="#">Posts</a>
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('posts.getPosts') }}">Blog</a>
+            <a class="navbar-brand" href="{{ url_for('posts.createPost') }}">Posts</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </nav>
     <hr>
-    <div class="content">
+    <div class="container container-fluid">
         {% block content %} {% endblock %}
     </div>
+    {{ bootstrap.load_js() }}
 </body>
 </html>
