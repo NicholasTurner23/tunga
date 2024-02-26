@@ -5,15 +5,15 @@
     <div class="content">
         <div class = "row">
             {% for d  in data %}
-            <div class="card card-header py-3 mb-2" style="grid-auto-flow: column;">
-                <h4 class="card-title">{{d.Title}}</h4>
-                <p class="card-text">{{d.Description}}</p>
-                <p>{{d.Author}}</p>
-                <p>{{d.Views}}</p>
-                <p>{{d.Likes}}</p>
-                <p>{{d['Date Posted']}}</p>
-                <p>{{d['Date Updated']}}</p>
-            </div>
+            <a href="{{url_for('posts.getPost', post_id=d.id)}}">
+                <div class="card card-header py-3 mb-2" style="grid-auto-flow: column;">
+                    <h4 class="card-title">{{d.title}}</h4>
+                    <p class="card-text">{{d.body}}</p>
+                    <p>{{d.author}}</p>
+                    <p>{{d['created_at']}}</p>
+                    <p>{{d['updated_at']}}</p>
+                </div>
+            </a>
             {%endfor%}
             </div>
     </div>
