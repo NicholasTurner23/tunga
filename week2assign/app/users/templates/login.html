@@ -3,15 +3,15 @@
 {% block content %}
 
 <div class="row">
-    <h1>Create post</h1>
+    <h1>Login!!!</h1>
 </div>
 <div class="bd-content ps-lg-4">
 <form method="POST" >
     {{form.hidden_tag()}}
-    {{form.title.label(class="form-label")}}
-    {{form.title(class="form-control")}}
-    {{form.description.label(class="form-label")}}
-    {{form.description(class="form-control")}}
+    {{form.email.label(class="form-label")}}
+    {{form.email(class="form-control")}}
+    {{form.password.label(class="form-label")}}
+    {{form.password(class="form-control")}}
     <br/>
     {{form.submit(class="btn btn-secondary")}}
 </form>
