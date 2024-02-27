@@ -3,14 +3,17 @@ from config import Config
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+loginmanager = LoginManager()
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)
     migrate.init_app(app, db)
+    loginmanager.init_app(app)
     Bootstrap5(app)
 
     #Blue prints
@@ -20,7 +23,13 @@ def create_app(config_class=Config):
     from app.posts import postbp as posts_bp
     app.register_blueprint(posts_bp)
 
+    from app.users import userbp as user_bp
+    app.register_blueprint(user_bp)
+
     return app
 
 def get_db():
     return db
+
+def get_loginmanager():
+    return loginmanager
