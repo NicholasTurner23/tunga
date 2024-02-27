@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <span class="title"><h1>{% block title %} Posts {% endblock %}</h1></span>
+    <div class="content">
+        <div class = "row">
+            {% for d  in data %}
+            <div class="card card-header py-3 mb-2" style="grid-auto-flow: column;">
+                <h4 class="card-title">{{d.Title}}</h4>
+                <p class="card-text">{{d.Description}}</p>
+                <p>{{d.Author}}</p>
+                <p>{{d.Views}}</p>
+                <p>{{d.Likes}}</p>
+                <p>{{d['Date Posted']}}</p>
+                <p>{{d['Date Updated']}}</p>
+            </div>
+            {%endfor%}
+            </div>
+    </div>
+{% endblock %}

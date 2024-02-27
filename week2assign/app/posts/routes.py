@@ -1,23 +1,36 @@
 from app.posts import postbp
 from typing import Dict
-from flask import jsonify, Response, request
-import os
-import json
+from flask import request, render_template, redirect
+import os, json
+from datetime import datetime
+from .forms import PostFrom
 
 
-@postbp.route('/posts', methods=["POST"])
-def createPost() -> str:
+@postbp.route('/posts/create', methods=["GET", "POST"])
+def createPost():
+    # data = request.data
+    data = {}
+    form = PostFrom()
+    if form.validate_on_submit():
+        data["title"] = form.title.data
+        data["description"] = form.description.data
+        data["author"] = form.author.data
+        data["views"] = 0
+        data["likes"] = 0
+        data["date_posted"] = datetime.now()
+        data["date_updated"] = datetime.now()
 
-    data = request.data
-
-    writeFile(data)
-    return "Your post has been recorded"
+    if data:
+        writeFile(data)
+        data.clear()
+        return redirect("/posts")
+    return render_template("createpost.html", form=form)
 
 @postbp.route('/posts', methods=["GET"])
-def getPosts() -> Response:
+def getPosts() -> str:
     file = os.getcwd()+"/app/posts/random_posts.txt"
     posts = read_posts(file)
-    return jsonify(posts)
+    return render_template("posts.html", data=posts)
 
 @postbp.route('/posts/<int:post_id>', methods=["GET"])
 def getPost(post_id) -> str:
@@ -35,18 +48,15 @@ def updatePost(post_id) -> str:
 def patchPost(post_id) -> str:
     return f"Work in progres - Patch - {post_id}"
 
-def read_posts(file: str | os.PathLike) -> Dict:
-    posts: Dict = {}
+def read_posts(file: str | os.PathLike) -> list:
+    posts: list = []
     with open(file, "r") as f:
         temp: Dict ={}
-        psts = 1
         for ln in f:
             if len(ln) > 1:
-                if ln.startswith("Title"):
-                    posts[psts] = temp
+                if ln.startswith("Title") and len(temp) > 0:
+                    posts.append(temp.copy())
                     temp.clear()
-                    psts += 1
-
                 lns = ln.split(":", 1)
                 temp[lns[0]] = lns[1].strip()
             else:
@@ -54,7 +64,7 @@ def read_posts(file: str | os.PathLike) -> Dict:
     return posts
 
 def writeFile(data) -> None:
-    data = json.loads(data)
+    # data = json.loads(data)
     path = os.getcwd()+"/app/posts/random_posts.txt"
     file = open(path, "a")
     file.write("Title: {}\n".format(data["title"]))
