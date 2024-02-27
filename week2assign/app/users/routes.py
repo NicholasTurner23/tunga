@@ -46,9 +46,9 @@ def login():
         flash('Invalid username or password', 'error')
     return render_template("login.html", form=form)
 
-@userbp.route("/logout")
+@userbp.route("/logout", methods=["GET"])
 @login_required
 def logout():
     logout_user()
     flash('logged out successfully!', 'success')
-    return redirect(url_for('login'))
+    return redirect("/login")
