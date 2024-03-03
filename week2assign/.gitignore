@@ -1,3 +1,5 @@
 .mypy*
 .gith*
 __pycache__
+*.db
+.env
