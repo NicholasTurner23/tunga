@@ -1,6 +1,6 @@
 from app.users import userbp
 from flask_login import login_user, login_required, logout_user
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, render_template
 from .models import User
 from app import get_loginmanager, utils
 from .forms import RegistrationFrom, LoginForm
@@ -29,7 +29,7 @@ def register():
         db.session.commit()
         flash('Successfully signed up!.', 'success')
         return redirect("/login")
-    return render_template("register.html", form=form)
+    return render_template("/users/register.html", form=form)
 
 
 @userbp.route("/login", methods=["GET", "POST"])
@@ -44,7 +44,7 @@ def login():
             return redirect('/posts')
     else:
         flash('Invalid username or password', 'error')
-    return render_template("login.html", form=form)
+    return render_template("/users/login.html", form=form)
 
 @userbp.route("/logout", methods=["GET"])
 @login_required

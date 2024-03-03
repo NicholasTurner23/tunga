@@ -21,10 +21,10 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
     
     from app.posts import postbp as posts_bp
-    app.register_blueprint(posts_bp)
+    app.register_blueprint(posts_bp, url_prefix='/posts')
 
     from app.users import userbp as user_bp
-    app.register_blueprint(user_bp)
+    app.register_blueprint(user_bp, url_prefix='/auth')
 
     return app
 
