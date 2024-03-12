@@ -1,8 +1,6 @@
 from app.posts import postbp
-from typing import Dict
-from flask import render_template, redirect, Response, flash
+from flask import render_template, redirect, Response, flash, current_app
 from flask_login import login_required, current_user
-import os, json
 from datetime import datetime
 from .forms import PostFrom
 from .models import BlogPost
