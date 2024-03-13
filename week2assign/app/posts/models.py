@@ -5,6 +5,7 @@ from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.orm import relationship
 from app.users.models import User
 from datetime import datetime
+from marshmallow import fields
 
 db = get_db() 
 ma = get_ma()
@@ -23,10 +24,13 @@ class BlogPost(db.Model):
     
 
 class BlogPostSchema(ma.SQLAlchemyAutoSchema):
+    author_id = fields.Integer()
+    author = fields.Nested('UserSchema')
     class Meta:
         model = BlogPost
         load_instance = True
         sqla_session = db.session
+        exclude = ('author',)
 
 blogpost_schema = BlogPostSchema()
 blogposts_schema = BlogPostSchema(many=True)
