@@ -1,3 +1,6 @@
+initializedb:
+	flask db init
+	
 migrate:
 	flask db migrate -m "$(message)"
 
@@ -7,4 +10,4 @@ dbupgrade:
 run:
 	flask run
 
-.PHONY: migrate dbupgrade run
+.PHONY: initializedb migrate dbupgrade run
