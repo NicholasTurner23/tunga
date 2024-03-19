@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load bootstrap3 bootstrap4 fontawesome %}
+
+{% block head_title %}{% trans "Blog Post: Sign In" %}{% endblock %}
+
+{% block content %}
+
+<h1>{% trans "Blog Post - Sign In" %}</h1>
+
+
+<form class="login form" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="primaryAction btn btn-default" type="submit">{% trans "Sign In" %}</button>
+</form>
+
+{% endblock %}
