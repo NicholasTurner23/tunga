@@ -25,6 +25,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,10 +47,11 @@ INSTALLED_APPS = [
     "extra_views",
     "cachalot",
     "corsheaders",
-
+    "blog_user.apps.BlogUserConfig",
+    "blog_post.apps.BlogPostConfig",
     "allauth",
     "allauth.account",
-
+    # "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -154,6 +156,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 LOGIN_REDIRECT_URL = "posts"
 LOGOUT_REDIRECT_URL = "account_login"
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
+ACCOUNT_AUTHENTICATION_METHOD ="email"
+ACCOUNT_EMAIL_REQUIRED=True
 
 
 STRONGHOLD_PUBLIC_NAMED_URLS = (
@@ -195,5 +199,5 @@ STATICFILES_FINDERS = [
     "npm.finders.NpmFinder",
 ]
 
-# AUTH_USER_MODEL = "staff.UserAccount"
+AUTH_USER_MODEL = "blog_user.User"
 ACCOUNT_ADAPTER = "blog_user.adapter.NoNewUsersAccountAdapter"
