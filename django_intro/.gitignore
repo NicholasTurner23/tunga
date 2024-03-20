@@ -1,0 +1,8 @@
+__pycache__
+.env
+.mypy_cache
+node_modules
+debug.log
+media/*
+assets/*
+package-lock.json
