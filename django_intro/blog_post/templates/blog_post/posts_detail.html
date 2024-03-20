@@ -1,0 +1,28 @@
+{% extends 'blog_post/base.html' %}
+{% load bootstrap3  humanize fontawesome %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="/">Posts</a></li>
+</ol>
+
+{% endblock %}
+{% block content %}
+    <span class="title"><h1>{% block title %} Post Details {% endblock %}</h1></span>
+    <div class="content">
+        <div class = "row">
+            <div class="card w-100 card-header py-3 mb-2" style="grid-auto-flow: row;">
+                <div class="card-body">
+                    <h4 class="card-title">{{object.title}}</h4>
+                    <p class="card-text">{{object.body}}</p>
+                    <p>{{object.author}}</p>
+                    <p>{{object.created}}</p>
+                    <p>{{object.updated}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="list-group">
+            <a class="btn btn-outline-dark" href="{% url 'blog_post:delete-post' object.id %}">Delete</a>
+        </div>
+    </div>
+{% endblock %}

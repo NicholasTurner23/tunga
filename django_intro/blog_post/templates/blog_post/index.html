@@ -1,0 +1,40 @@
+{% extends 'blog_post/base.html' %}
+{% load bootstrap3  humanize fontawesome %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="/">Posts</a></li>
+</ol>
+
+{% endblock %}
+{% block content %}
+    <span class="title"><h1>{% block title %} Posts {% endblock %}</h1></span>
+    <div class="content">
+        <div class = "row">
+           
+            {% for post in posts %}
+                <a href="{% url 'blog_post:post-details' post.id %}">
+                    <div class="card card-header py-3 mb-2" style="grid-auto-flow: column;">
+                        <h4 class="card-title">{{post.title}}</h4>
+                        <p class="card-text">{{post.body}}</p>
+                        <p>{{post.author}}</p>
+                        <p>{{ post.created_at}}</p>
+                        <p>{{post.updated_at}}</p>
+                    </div>
+                </a>
+            {% empty %}
+            <div class="content">
+                <div class = "row">
+                    <div class="card w-100 card-header py-3 mb-2" style="grid-auto-flow: row;">
+                        <div class="card-body">
+                            <h4 class="card-title">No Posts to display at this time</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+                </div>
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}

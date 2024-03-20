@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 bootstrap4 fontawesome static humanize %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'blog_post:posts' %}">Posts</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'blog_user:users' %}">Users</a></li>
+  <li class="breadcrumb-item">{{ object.client_code }}</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+<h3>User Detail</h3>
+
+<div class="row">
+  <div class="col-sm-6">
+    <dl class = "dl-horizontal">
+        <table class="table">
+            <tr><td>First Name</td><td>{{ object.first_name}}</td></tr>
+            <tr><td>Last Name</td><td>{{ object.last_name}}</td></tr>
+            <tr><td>Telephone number</td><td>{{ object.phone_number }}</td></tr>
+            <tr><td>Email Address</td><td>{{ object.email}}</td></tr>
+            <tr><td>Active</td><td>{{ object.is_active}}</td></tr>
+            <tr><td>Admin</td><td>{{ object.is_staff}}</td></tr>
+            <tr><td>Super User</td><td>{{ object.is_superuser}}</td></tr>
+            <tr><td>Last login</td><td>{{ object.last_login}}</td></tr>
+        </table>
+    </dl>
+  </div>
+</div>
+</hr>
+<div>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a role="tab" data-toggle="tab" href="#clients">Posts</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div id="clients" role="tabpanel" class="tab-pane active">
+    <table class="table table-bordered">
+        <thead>
+            <tr><th>id</th> <th>title</th> <th>Body</th> <th>Created</th> </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a href="{% url 'blog_post:post-details' post.id %}">{{ post.id }}</a></td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.body }}</td>
+                <td>{{ post.created }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'blog_post/base.html' %}
+{% load bootstrap3  humanize fontawesome %}
+
+{% block content %}
+  <div class="center">
+
+    <h2>Delete Post</h2>
+    <div class="content">
+        <div class = "row">
+            <div class="card w-100 card-header py-3 mb-2" style="grid-auto-flow: row;">
+                <form method="post">
+                    {% csrf_token %}
+                    <p>Are you sure that you want to delete "{{object.title}}"?</p>
+                    <p class="form-buttons">
+                        <input type="submit" class="btn btn-primary" value="Delete">
+                        <a href="{% url 'blog_post:post-details' object.id %}" class="btn btn-outline">Cancel</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}
