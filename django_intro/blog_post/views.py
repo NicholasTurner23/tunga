@@ -47,6 +47,9 @@ class UpdateBlogPost(UpdateView):
         self.object.save()
         return super().form_valid(form)
     
+    def get_success_url(self):
+        return reverse_lazy("blog_post:update-post", kwargs={"pk": self.object.pk})
+    
 
 class DetailBlogPost(DetailView):
     model = models.Posts
