@@ -7,7 +7,6 @@ class UserTable(tables.Table):
     class Meta:
         model = models.User
         fields = [
-            "email",
             "first_name",
             "last_name",
             "phone_number",

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 bootstrap4 fontawesome static humanize i18n%}
+
+{% block head_title %}{% if object %}Edit{% else %}Create{% endif %} Post{% endblock %}
+
+{% block extrahead %}
+{{ formset.media }}
+{{ form.media }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog_post:posts' %}">Posts</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'blog_user:users' %}">Users</a></li>
+    <li class="breadcrumb-item">{{ object.id }}</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+
+<h3>{% if object %}Edit{% else %}Add{% endif %} Post</h3>
+<hr />
+
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form layout="horizontal" %}
+  {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+</form>
+
+{% endblock %}

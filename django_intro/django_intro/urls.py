@@ -22,6 +22,7 @@ from blog_post.views import BlogPostList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/", include("api.urls")),
     path('', BlogPostList.as_view(), name="posts"),
     path('blog_post/', include('blog_post.urls')),
     path('blog_user/', include('blog_user.urls')),
